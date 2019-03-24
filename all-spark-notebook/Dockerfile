@@ -1,6 +1,7 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
 ARG BASE_CONTAINER=jupyter/pyspark-notebook
+ARG mxnet_version=1.4.0
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
@@ -19,6 +20,11 @@ RUN apt-get update && \
     gfortran \
     gcc && \
     rm -rf /var/lib/apt/lists/*
+    
+RUN apt-get update && \
+    apt-get install -y wget python-dev gcc && \
+    wget https://bootstrap.pypa.io/get-pip.py && \
+    python get-pip.py
 
 USER $NB_UID
 
@@ -41,6 +47,8 @@ RUN pip install --no-cache-dir \
     rm -rf /home/$NB_USER/.local && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
+    
+RUN pip install mxnet==$mxnet_version
 
 # Spylon-kernel
 RUN conda install --quiet --yes 'spylon-kernel=0.4*' && \

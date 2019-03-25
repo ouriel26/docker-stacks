@@ -43,7 +43,8 @@ RUN conda install --quiet --yes \
 RUN pip install --no-cache-dir \
     https://dist.apache.org/repos/dist/release/incubator/toree/0.3.0-incubating/toree-pip/toree-0.3.0.tar.gz \
     && \
-    jupyter toree install --sys-prefix && \
+    jupyter toree install --ToreeInstall.prefix=$CONDA_DIR && \
+    #jupyter toree install --sys-prefix && \
     rm -rf /home/$NB_USER/.local && \
     sudo fix-permissions $CONDA_DIR && \
     sudo fix-permissions /home/$NB_USER

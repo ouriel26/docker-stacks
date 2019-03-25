@@ -46,8 +46,8 @@ RUN pip install --no-cache-dir \
     jupyter toree install --ToreeInstall.prefix=$CONDA_DIR && \
     #jupyter toree install --sys-prefix && \
     rm -rf /home/$NB_USER/.local && \
-    sudo fix-permissions $CONDA_DIR && \
-    sudo fix-permissions /home/$NB_USER
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
     
 RUN pip install mxnet
 

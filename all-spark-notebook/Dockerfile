@@ -45,10 +45,10 @@ RUN pip install --no-cache-dir \
     && \
     jupyter toree install --sys-prefix && \
     rm -rf /home/$NB_USER/.local && \
-    fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
+    sudo fix-permissions $CONDA_DIR && \
+    sudo fix-permissions /home/$NB_USER
     
-RUN pip install mxnet==$mxnet_version
+RUN pip install mxnet
 
 # Spylon-kernel
 RUN conda install --quiet --yes 'spylon-kernel=0.4*' && \
